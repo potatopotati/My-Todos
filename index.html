@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>My Todos!</title>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link rel="stylesheet" href="./style.css">
+        <link rel="icon" href="./my-icon.png.png" type="image/png">
+        <script type="module" src="./script.js" defer></script>
+        <script type="module" src="./project.js" defer></script>
+        <script type="module" src="./storage.js" defer></script>
+        <script type="module" src="./todos.js" defer></script>
+    </head>
+    <body>
+        <section class="projects">
+            <nav>
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M11 6L21 6.00072M11 12L21 12.0007M11 18L21 18.0007M3 11.9444L4.53846 13.5L8 10M3 5.94444L4.53846 7.5L8 4M4.5 18H4.51M5 18C5 18.2761 4.77614 18.5 4.5 18.5C4.22386 18.5 4 18.2761 4 18C4 17.7239 4.22386 17.5 4.5 17.5C4.77614 17.5 5 17.7239 5 18Z" stroke="#E65100" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                <h1>Todos</h1>
+            </nav>
+            <main>
+                <h1>Projects</h1>
+                <button class="add-project">
+                    <svg width="256px" height="256px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#ffffff" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title></title> <g id="Complete"> <g data-name="add" id="add-2"> <g> <line fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="12" x2="12" y1="19" y2="5"></line> <line fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="5" x2="19" y1="12" y2="12"></line> </g> </g> </g> </g></svg>
+                    <p>Add Project</p>
+                </button>
+                <ul class="project-list">
+                    <p class="no-project">No projects yet.</p>
+                </ul>
+            </main>
+        </section>
+        <section class="todos">
+            <h2 class="selected-project-name"></h2>
+            <button class="add-todos">
+                <svg width="256px" height="256px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#ffffff" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title></title> <g id="Complete"> <g data-name="add" id="add-2"> <g> <line fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="12" x2="12" y1="19" y2="5"></line> <line fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="5" x2="19" y1="12" y2="12"></line> </g> </g> </g> </g></svg>
+                <p>Add Task</p>
+            </button>
+            <p class="no-task">No task yet.</p>
+            <ul class="todo-list"> 
+                
+            </ul>
+        </section>
+        <div id="modal-overlay">
+            <div id="modal-content">
+                <h2>Add New Project</h2>
+                <div class="modal-body">
+                    <h3>Project Name:</h3>
+                    <input type="text" placeholder="e.g. Data Structure & Algorithm" id="projectName" />
+                    <p id="error-message">Please enter a Project Name!</p>
+                </div>
+                <div class="modal-buttons">
+                    <button id="saveProject">Save</button>
+                    <button id="closeModal">Cancel</button>
+                </div>
+            </div>
+        </div>
+        <div id="todo-modal-overlay">
+            <div id="todo-content">
+                <h2>Add New Task</h2>
+                <div class="todo-body">
+                    <h3>Task Name:</h3>
+                    <input type="text" placeholder="e.g. Submit Assignment 1" id="todoName" />
+                    <p id="taskname-error-message">Please enter a Task Name!</p>
+                    </br>
+                    <h3>Deadline:</h3>
+                    <input id="todoDeadlline" type="date"/>
+                    <p id="deadline-error-message">Please enter a Deadline!</p>
+                    </br>
+                    <h3>Priority:</h3>
+                    <select id="taskPriority">
+                        <option  value="High">🔴 High</option>
+                        <option  value="Medium">🟡 Medium</option>
+                        <option  value="Low">🟢 Low</option>
+                    </select>
+                    <p id="priority-error-message">Please select a priority!</p>
+                </div>
+                <div class="todo-buttons">
+                    <button id="saveTodo">Save</button>
+                    <button id="closeTodo">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

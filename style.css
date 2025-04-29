@@ -1,0 +1,521 @@
+body{
+    height: 100vh;
+    margin: 0;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    display: flex;
+}
+
+.projects{
+    background-color: #F5F5F5;
+    width: 40%;
+    min-height: 100%;
+    height: fit-content;
+    padding: 1rem;
+    margin: 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    box-shadow: 1px 0 7px rgba(0, 0, 0, 0.1);
+}
+
+nav{
+    display: flex;
+    align-items: center;
+    height: fit-content;
+    width: 100%;
+    gap:0.4rem;
+
+}
+
+.projects nav>svg{
+    width: 3rem;
+    height: 3rem;
+    margin: 0;
+    padding: 0;
+}
+
+.projects nav>h1{
+    font-size: 2rem;
+    margin: 0;
+    padding: 0;
+    color: #E65100;
+}
+
+.projects main{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.projects main>h1{
+    font-size: 1.8rem;
+    margin: 0;
+    padding: 0;
+}
+
+.add-project{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:0.2rem;
+    background-color: #E65100;
+    border-color: transparent;
+    width: 40%;
+    box-sizing: border-box;
+    padding: 0.5rem;
+    border-radius: 0.8rem;
+    transition: transform 0.1s ease-in-out;
+}
+
+.add-project:hover{
+    cursor: pointer;
+    background-color: #e65100dc;
+}
+
+.add-project:active{
+    transform: scale(0.9856);
+}
+
+.add-project svg{
+    width: 1.5rem;
+    height: 1.5rem;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.add-project p{
+    color: white;
+    font-size: 1rem;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+#modal-overlay, #todo-modal-overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index:999999;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+#modal-content, #todo-content{
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index:999999;
+    width: fit-content;
+    height: fit-content;
+    background-color: white;
+    border-radius: 2rem;
+    box-sizing: border-box;
+    padding: 3rem;
+    margin: 0;
+    gap: 2rem;
+    box-shadow: 1px 0   7px rgba(0, 0, 0, 0.1);
+}
+
+#modal-content h2, #todo-content h2{
+    color: #E65100;
+    font-size: 2.2rem;
+    font-weight:bolder;
+    margin: 0;
+}
+
+.modal-body, .todo-body{
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    gap:0.1rem;
+    width: 100%;
+    align-items: flex-start;
+}
+
+.modal-body h3, .todo-body h3{
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+.modal-body input, .todo-body input{
+    background-color: #f5f5f5cb;
+    width:100%;
+    height:3rem;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    box-sizing: border-box;
+    font-weight:500px;
+    font-size: 1rem;
+    margin: 0;
+}
+
+#todoDeadlline{
+    cursor: pointer;
+    padding: 0.4rem;
+}
+
+#taskPriority{
+    cursor: pointer;
+    border-radius: 0.5rem;
+    border: 0.12rem black solid;
+    font-weight:500px;
+    font-size: 1rem;
+    margin: 0;
+    background-color: #f5f5f5cb;
+    width:100%;
+    height:3rem;   
+    appearance: none; /* Remove default OS styles */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image:url("data:image/svg+xml;utf8,<svg viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><g id='SVGRepo_bgCarrier' stroke-width='0'></g><g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'></g><g id='SVGRepo_iconCarrier'> <path fill-rule='evenodd' clip-rule='evenodd' d='M12.7071 14.7071C12.3166 15.0976 11.6834 15.0976 11.2929 14.7071L6.29289 9.70711C5.90237 9.31658 5.90237 8.68342 6.29289 8.29289C6.68342 7.90237 7.31658 7.90237 7.70711 8.29289L12 12.5858L16.2929 8.29289C16.6834 7.90237 17.3166 7.90237 17.7071 8.29289C18.0976 8.68342 18.0976 9.31658 17.7071 9.70711L12.7071 14.7071Z' fill='%23000000'></path> </g></svg>");
+    background-repeat: no-repeat;
+    background-position: right 0.4rem center;
+    background-size: 1.5rem;
+    padding-left: 1rem;
+    font-size: 1rem;
+}
+
+.modal-body input:focus, .todo-body input:focus, #taskPriority:focus{
+    border-radius: 0.5rem;
+    border: 0.2rem,#e65100d1,solid;
+    outline: none;
+    box-shadow: 0 0 0.15rem #e65100;
+}
+
+#error-message, #priority-error-message, #deadline-error-message, #taskname-error-message{
+    margin: 0;
+    font-size: 0.8rem;
+    color: red;
+    display: none;
+    font-weight: 5px;
+}
+
+.modal-buttons, .todo-buttons{
+    gap:10rem;
+    display: flex;
+    gap:2rem
+}
+
+.modal-buttons button, .todo-buttons button{
+    font-size: 1.2rem;
+    border-radius: 1rem;
+    width: 7rem;
+    height: 3rem;
+    color: white;
+    background-color: #e65100;
+    border: none;
+    outline: none;
+}
+
+.modal-buttons button:hover, .todo-buttons button:hover{
+    cursor: pointer;
+    background-color: #e65100dc;
+}
+
+.project-list{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding:0;
+    margin: 0;
+    box-sizing: border-box;
+    height: auto;
+    list-style-type:none;
+}
+
+.project-item{
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+    gap:0.5rem; 
+    font-size: 1.3rem;
+    cursor: pointer;
+    transition: background-color,0.2s,ease-in-out;
+}   
+
+.project-item:hover{
+    background-color: white;
+    border-radius: 0.5rem;
+}
+
+.project-item.active {
+    background-color: white;
+    border-radius: 0.5rem;
+}
+
+.project-item p{
+    overflow-x:hidden;
+    text-overflow: ellipsis;    
+}
+
+.project-item button{
+    cursor: pointer;
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    outline: none;
+    border: none;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+}
+
+.project-item button svg{
+    width: 2.3rem;
+    height: 2.3rem;
+    margin: 0;
+    padding: 0;
+}
+
+.no-project, .no-task{
+    display: none;
+    padding: 0;
+    margin: 0;
+    color: gray;
+    font-weight: 500px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: fit-content;
+}
+
+.remove-project{
+    width: fit-content;
+    height: fit-content;
+}
+
+.todos{
+    display: none;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    width: 60%;
+    height: 100%;
+    gap:1rem;
+}
+
+.todo-list{
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.todos h2{
+    width: 100%;
+    align-self: flex-end;
+    background-color: #E65100;
+    text-align: center;
+    color:white;
+    height:3rem;
+    box-sizing: border-box;
+    padding:1rem;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.9;
+    overflow-x:hidden;
+    overflow-y: hidden;
+    text-overflow: ellipsis;  
+}
+
+.add-todos{
+    width: 8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 1rem;
+    outline: none;
+    border: none;
+    background-color: #E65100;
+    color: white;
+    gap:0.2rem;
+    align-self: flex-end;
+    font-size: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.add-todos svg{
+    width: 1.5rem;
+    height: 1.5rem;
+    margin: 0;
+    padding: 0;
+}
+
+.task-item{
+    width: 100%;
+    margin: 0;
+    padding-inline: 1rem;
+    display: flex;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.task-item-checkbox{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap:0.5rem;
+    cursor: pointer;
+    width: 40%;
+}
+
+.task-item-checkbox input {
+    display: none; /* hide the native checkbox */
+}
+
+.checkmark{
+    width: clamp(1.2rem, 2vw, 1.5rem);
+    height: clamp(1.2rem, 2vw, 1.5rem);
+    border-radius: 50%;
+    border: 2px #000000 solid;
+    outline: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.task-item-name{
+    font-size: 1.2em;
+    flex:1;
+    cursor: pointer;
+    overflow-x:hidden;
+    text-overflow: ellipsis;    
+}
+
+/* +: Adjacent sibling selector */
+.task-item-checkbox input:checked + .checkmark::after{
+    content: "✓";
+    font-size: 1.5rem;
+    align-self: center;
+}
+
+.task-item:has(.task-item-checkbox input:checked) .task-item-name{
+    animation: strikethrough  0.5s forwards;
+    color:#c5c5c5;
+}
+
+.priority-remove{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap:1rem;
+    font-size: 1rem;
+    width: 40%;
+}
+
+.task-item-priority{
+    padding:0.5rem;
+    border-radius: 1rem;
+    width: 20%;
+    text-align: center;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+}
+
+.task-item-button{
+    width:2rem;
+    height: 2rem;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1200px) {
+    .add-project{
+        width: 60%;
+    }
+}
+
+@media screen and (max-width: 850px) {
+    .add-project{
+        width: fit-content;
+        border-radius: 0.55rem;
+    }
+    .add-project p{
+        display: none;
+    }
+    .add-project svg{
+        width: 1rem;
+        height: 1rem;
+    }
+    .projects main{
+        gap:0.5rem
+    }
+    .projects main>h1{
+        font-size: 1.2rem;
+        box-sizing: border-box;
+    }
+    .projects nav>svg{
+        width: 2rem;
+        height: 2rem;
+        margin: 0;
+        padding: 0;
+    }
+    .projects nav>h1{
+        font-size: 1.3rem;
+        margin: 0;
+        padding: 0;
+        color: #E65100;
+    }
+    #modal-content h2{
+        font-size: 1.4rem;
+    }
+    .modal-body h3{
+        font-size: 0.8rem;
+    }
+    .modal-body input{
+        height:2rem;
+        font-size: 0.7rem;
+    }
+    #error-message{
+        font-size: 0.5rem;
+    }
+    .modal-buttons button {
+        font-size:1rem;
+        width: 5rem;
+        height: 2rem;
+        border-radius: 0.7rem;
+    }
+    .no-project{
+        font-size: 0.6rem;
+    }
+    .project-item button svg{
+        width: 1.8rem;
+        height: 1.8rem;
+    }
+    .project-item{
+        font-size: 1rem;
+    }   
+}
+
+/* define stages in strikethrough animation */
+@keyframes strikethrough {
+    from {
+      /* text-decoration-color: transparent; */
+      text-decoration:none;
+      text-decoration-color: transparent;
+    }
+    to {
+      /* text-decoration-color: black; */
+      text-decoration: line-through;
+      text-decoration-color: black;
+    }
+  }
